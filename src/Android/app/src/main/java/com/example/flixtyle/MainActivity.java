@@ -19,8 +19,7 @@ import com.example.flixtyle.R;
 import com.example.flixtyle.RecommedationFragment;
 
 
-public class MainActivity extends AppCompatActivity
-        implements AccountFragment.OnFragmentInteractionListener, DiscoveryFragment.OnFragmentInteractionListener, RecommedationFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
 
     @Override
@@ -56,13 +55,6 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
-    }
-
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {

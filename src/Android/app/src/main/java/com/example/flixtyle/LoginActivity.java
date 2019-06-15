@@ -62,10 +62,10 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
+        mAuth = FirebaseAuth.getInstance();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mAuth=FirebaseAuth.getInstance();
-        firebaseAuthStateListener=new FirebaseAuth.AuthStateListener() {
+        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
@@ -74,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                    return;
                 }
             }
         };
@@ -101,8 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                 final String email= mEmail.getText().toString();
                 final String password=mPassword.getText().toString();
 
-
-
                 mAuth.signInWithEmailAndPassword(email,
                         password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -110,13 +107,9 @@ public class LoginActivity extends AppCompatActivity {
                         //check if creation wasn't successful
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "failed to sign in", Toast.LENGTH_SHORT).show();
-                            ;
-
                         }
                     }
-
                 });
-
             }
         });
 
@@ -131,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //mAuth.addAuthStateListener(firebaseAuthStateListener);
+        mAuth.addAuthStateListener(firebaseAuthStateListener);
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         updateUI(currentUser);
@@ -203,8 +196,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent= new Intent(LoginActivity.this, AfterLogin.class);
                                 intent.putExtra("UID", UID);
                                 startActivity(intent);
-
-
                             }
                         } else {
                             // If sign in fails, display a message to the user.

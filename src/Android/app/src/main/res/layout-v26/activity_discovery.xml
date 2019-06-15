@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".DiscoveryActivity">
 
-
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
         android:layout_width="match_parent"

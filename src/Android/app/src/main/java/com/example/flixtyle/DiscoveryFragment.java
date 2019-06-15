@@ -29,7 +29,6 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -104,7 +103,7 @@ public class DiscoveryFragment extends Fragment {
                 FirebaseDatabase.getInstance().getReference()
                         .child("Discovery")
                         .child(FirebaseAuth.getInstance().getUid())
-                        .child(((Flinger.Item) dataObject).getUid())
+                        .child(((Item) dataObject).getUid())
                         .setValue(true);
             }
 
@@ -114,7 +113,7 @@ public class DiscoveryFragment extends Fragment {
                 FirebaseDatabase.getInstance().getReference()
                         .child("Discovery")
                         .child(FirebaseAuth.getInstance().getUid())
-                        .child(((Flinger.Item) dataObject).getUid())
+                        .child(((Item) dataObject).getUid())
                         .setValue(false);
             }
 
@@ -190,7 +189,7 @@ public class DiscoveryFragment extends Fragment {
                                                 .getAsJsonObject();
                                         for (String key: root.keySet()) {
                                             JsonObject o = root.get(key).getAsJsonObject();
-                                            flinger.getArray().add(new Flinger.Item(
+                                            flinger.getArray().add(new Item(
                                                     key,
                                                     o.get("image_url").getAsString(),
                                                     o.get("item_name").getAsString(),
@@ -331,6 +330,12 @@ public class DiscoveryFragment extends Fragment {
         });
     }
 
+    public void logoutUser(View view) {
+        mAuth.signOut();
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
 
 
     public interface OnFragmentInteractionListener {

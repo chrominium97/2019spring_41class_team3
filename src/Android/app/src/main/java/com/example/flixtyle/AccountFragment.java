@@ -179,6 +179,15 @@ public class AccountFragment extends Fragment {
                 startActivity(intent1);
             }
         });
+        view.findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
 //        getUserFirebaseDatabase();
 
